@@ -1,4 +1,4 @@
 # ansible_data
 
  
-Ansible playbooks repository
+Ansible data repository
