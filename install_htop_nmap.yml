@@ -4,52 +4,11 @@
   become: true
   tasks:
 
-  - name: Install htop, nmap on rocky linux
-    dnf:
-      name: "htop"
-      state: present
-    when: ansible_facts['os_family'] == "RedHat"
-    vars:
-      package:
-        - vim
-        - git
+  - name: Install htop, nmap
+    ansible.builtin.package:
+        name:
+          - htop
+          - nmap
+        state: present
 
-
-  - name: Install nmap on rocky linux
-    dnf:
-      name: "nmap"
-      state: present
-    when: ansible_facts['os_family'] == "RedHat"
-    vars:
-      package:
-        - vim
-        - git
-
-
-
-
-
-
-  - name: Install htop, nmap on Ubuntu/debian
-    apt:
-      name: "htop"
-      state: present
-      update_cache: yes
-    when: ansible_facts['os_family'] == "Debian"
-    vars:
-      package:
-        - vim
-        - git
-
-
-  - name: Install nmap on Ubuntu/debian
-    apt:
-      name: "nmap"
-      state: present
-      update_cache: yes
-    when: ansible_facts['os_family'] == "Debian"
-    vars:
-      package:
-        - vim
-        - git
 
