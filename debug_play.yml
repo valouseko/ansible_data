@@ -1,0 +1,12 @@
+---
+
+  - name: Display Ansible distribution and version
+    hosts: linux_servers
+    tasks:
+      - name: Show ansible_distribution
+        ansible.builtin.debug:
+          msg: "Ansible Distribution: {{ ansible_distribution }}"
+
+      - name: Show ansible_distribution_major_version
+        ansible.builtin.debug:
+          msg: "Ansible Distribution Major Version: {{ ansible_distribution_major_version }}"
