@@ -1,4 +1,4 @@
-[linux_servers]
-server_rocky ansible_host=192.168.56.101 domain_name=server_rocky
-server_debian ansible_host=192.168.56.102 domain_name=server_debian
-server_ubuntu ansible_host=192.168.56.104 domain_name=server_ubuntu
+[linux_servers] 
+192.168.56.101 domain_name=server-rock 
+192.168.56.102 domain_name=server-debian 
+192.168.56.104 domain_name=server-ubuntu
