@@ -9,7 +9,7 @@
         regexp: "^PermitRootLogin"
         line: "PermitRootLogin no"
       notify:
-        - "Restart sshd"
+        - Restart sshd
 
   handlers:
     - name: Restart sshd
