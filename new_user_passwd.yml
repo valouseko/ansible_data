@@ -1,0 +1,11 @@
+---
+
+- hosts: linux_servers
+  become: true
+  tasks:
+
+    - name: Set password to an existing user
+      ansible.builtin.user:
+        name: "new_user"
+        password: "{{ 'neprolomitelne_heslo' | password_hash('sha512') }}"
+

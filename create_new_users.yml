@@ -1,0 +1,14 @@
+---
+- hosts: linux_servers
+  become: true
+  tasks:
+    - name: Create a new user
+      ansible.builtin.user:
+        name: "new_user"
+        state: present
+        shell: /bin/bash
+
+    - name: Set password for a new user
+      ansible.builtin.command:
+        cmd: echo "new_user:neprolomitelne_heslo" | chpasswd
+      no_log: true
