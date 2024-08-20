@@ -1,0 +1,14 @@
+---
+
+- hosts: linux_servers
+  become: true
+  vars_files:
+    - host_vars/server-debian.yml
+    - host_vars/server-ubuntu.yml
+    - host_vars/server-rocky.yml
+  tasks:
+
+    - name: Vytvořit soubor s heslem na serverech
+      ansible.builtin.copy:
+        dest: "/home/password.txt"
+        content: "{{ pass }}"

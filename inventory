@@ -1,4 +1,3 @@
-
 [linux_servers] 
 192.168.56.101 domain_name=server-rocky 
 192.168.56.102 domain_name=server-debian 
