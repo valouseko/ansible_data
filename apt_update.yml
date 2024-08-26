@@ -1,7 +1,6 @@
 ---
-- hosts: localhost
+- hosts: linux_servers
   gather_facts: no
-  connection: local
-  become: yes
+  become: true
   tasks:
-    - apt: update_cache=yes
+    - package: update_cache=yes

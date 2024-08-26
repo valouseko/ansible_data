@@ -1,0 +1,19 @@
+---
+
+- hosts: linux_servers
+  become: true
+  tasks:
+
+    - name: update Cache
+      package:
+        update_cache: yes
+
+    - name: remove apache2 package
+      ansible.builtin.package:
+        name: apache2
+        state: absent
+
+    - name: add php support for apache
+      package:
+        name: libapache2-mod-php
+        state: present
