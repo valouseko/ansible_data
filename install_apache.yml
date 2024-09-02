@@ -4,42 +4,12 @@
   become: true
   tasks:
 
-    - name: update Cache
+
+
+    - name: install apache and php packages
       ansible.builtin.package:
+        name:
+          - "{{ apache_package }}"
+          - "{{ php_package }}"
+        state: present
         update_cache: yes
-      when: ansible_facts['os_family'] == "Debian"
-
-
-    - name: install apache2 package
-      ansible.builtin.package:
-        name: apache2
-        state: present
-      when: ansible_facts['os_family'] == "Debian"
-
-
-    - name: add php support for apache
-      ansible.builtin.package:
-        name: libapache2-mod-php
-        state: present
-      when: ansible_facts['os_family'] == "Debian"
-#---------------------------------------
-#Rocky
-
-    - name: update Cache
-      ansible.builtin.package:
-        update_cache: yes
-      when: ansible_facts['os_family'] == "RedHat"
-
-
-    - name: install apache2 package
-      ansible.builtin.package:
-        name: httpd
-        state: present
-      when: ansible_facts['os_family'] == "RedHat"
-
-
-    - name: add php support for apache
-      ansible.builtin.package:
-        name: php
-        state: present
-      when: ansible_facts['os_family'] == "RedHat"

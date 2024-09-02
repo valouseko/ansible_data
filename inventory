@@ -1,4 +1,13 @@
-[linux_servers] 
-server-rocky ansible_host=192.168.56.101 domain_name=server-rocky 
-server-debian ansible_host=192.168.56.102 domain_name=server-debian 
-server-ubuntu ansible_host=192.168.56.104 domain_name=server-ubuntu
+[linux_servers]
+server-rocky ansible_host=192.168.56.101 domain_name=server-rocky apache_package=httpd php_package=php 
+server-debian ansible_host=192.168.56.102 domain_name=server-debian apache_package=apache2 php_package=libapache2-mod-php
+server-ubuntu ansible_host=192.168.56.104 domain_name=server-ubuntu apache_package=apache2 php_package=libapache2-mod-php
+
+[rocky_linux]
+server-rocky
+
+[debian]
+server-debian
+
+[ubuntu]
+server-ubuntu
