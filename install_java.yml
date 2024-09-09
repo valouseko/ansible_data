@@ -1,0 +1,14 @@
+---
+- hosts: linux_servers
+  become: true
+  roles:
+    - role: gantsign.java
+      java_version: "8"
+      java_is_default_instalation: false
+      java_fact_group_name: "java8"
+
+    - role: gantsign.java
+      java_version: "17"
+      java_is_default_instalation: true
+      java_fact_group_name: "java17"
+
