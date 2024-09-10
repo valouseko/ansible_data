@@ -5,14 +5,12 @@
     - role: gantsign.java
       java_version: "8"
       java_is_default_instalation: false
-      java_fact_group_name: "java8"
       java_facts: true
       java_fact_group_name: "java_8"
 
     - role: gantsign.java
       java_version: "17"
       java_is_default_instalation: true
-      java_fact_group_name: "java17"
       java_facts: true
       java_fact_group_name: "java_17"
 
