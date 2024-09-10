@@ -6,9 +6,18 @@
       java_version: "8"
       java_is_default_instalation: false
       java_fact_group_name: "java8"
+      java_facts: true
 
     - role: gantsign.java
       java_version: "17"
       java_is_default_instalation: true
       java_fact_group_name: "java17"
+      java_facts: true
+  tasks:
+    - name: Display Java installation path
+      ansible.builtin.command: "readlink -f $(which java)"
+      register: java_path
 
+    - name: Show the Java installation path
+      ansible.builtin.debug:
+        msg: "Java is installed at {{ java_path.stdout }}"
