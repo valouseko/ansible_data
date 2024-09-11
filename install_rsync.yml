@@ -1,0 +1,74 @@
+
+---
+- hosts: linux_servers
+  become: true
+  tasks:
+    - name: Install rsync
+      ansible.builtin.package:
+        name: rsync
+        state: present
+#DIRECTORY
+    - name: Create backup directory
+      ansible.builtin.file:
+        path: /home/backup/backup
+        state: directory
+        owner: backup
+        group: backup
+        mode: "0500"
+#USER
+    - name: Create a backup user
+      ansible.builtin.user:
+        name: backup
+        home: /home/backup
+        shell: /bin/bash
+        create_home: yes
+        state: present
+#.SSH DIRECTORY
+    - name: Create .ssh directory for backup users
+      ansible.builtin.file:
+        path: /home/backup/.ssh
+        state: directory
+        owner: backup
+        group: backup
+        mode: "0700"
+#GENERATE SSH KEY
+    - name: Generate SSH key for backup user
+      ansible.builtin.openssh_keypair:
+        path: /home/backup/.ssh/id_rsa
+        owner: backup
+        mode: "0600"
+#.SSH/AUTHORIZED_KEYS FILE
+    - name: Create .ssh/authorized_key file for backup users
+      ansible.builtin.file:
+        path: /home/backup/.ssh/authorized_keys.txt
+        state: touch
+        owner: backup
+        group: backup
+        mode: "0600"
+
+#######################
+#COPY SSH KEY
+#    - name: Add backup user's public key to authorized_keys on target servers
+#      ansible.builtin.copy:
+#        src: /home/backup/.ssh/id_rsa.pub
+#        dest: /home/backup/.ssh/authorized_keys.txt
+#        owner: backup
+#        group: backup
+#        mode: "0600"
+#        content: "{{ lookup('file', '/home/backup/.ssh/id_rsa.pub') }}"
+#        remote_src: yes
+#        backup: yes
+
+    - name: Slurp public key from remote server
+      ansible.builtin.slurp:
+        src: /home/backup/.ssh/id_rsa.pub
+      register: pub_key_content
+
+    - name: Add public key to authorized_keys on target servers
+      ansible.builtin.lineinfile:
+        path: /home/backup/.ssh/authorized_keys.txt
+        line: "{{ pub_key_content['content'] | b64decode }}"
+        create: yes
+        owner: backup
+        group: backup
+        mode: '0600'
