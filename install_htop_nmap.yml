@@ -6,9 +6,9 @@
 
   - name: Install htop, nmap
     ansible.builtin.package:
-        name:
-          - htop
-          - nmap
-        state: present
+      name:
+        - htop
+        - nmap
+      state: present
 
 
